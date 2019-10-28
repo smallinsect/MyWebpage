@@ -1,0 +1,109 @@
+<html>
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>系统主页</title>
+
+<script type="text/javascript" src="./JSON/jquery.min.js"></script>
+<script type="text/javascript" src="./JSON/jquery.flexslider-min.js"></script>
+</head>
+<body topmargin="0" leftmargin="0" rightmargin="0" bottommargin="0" scroll=no>
+<div align="center">
+
+
+</div>	
+</body>
+</html>
+
+<script language="javascript">
+var ctl=0;
+var ctl1=0;
+var cdflag =0 ;
+var oldval =0;
+var newval = 0;
+
+function historyback(){
+    window.clearInterval(timer);  
+    return true; 
+}
+function GetXmlHttpObject() {   
+	var xmlHttp=null;   
+	try{xmlHttp=new XMLHttpRequest();}
+	catch(e){ 
+		try{xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");}
+		catch(e){xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");}     
+	}
+	return xmlHttp; 
+}
+//打开串口
+function openSerial(){
+    var xhr = GetXmlHttpObject();   
+	if(xhr){  
+		xhr.open("GET","assistfunction.lua?openSerial",true);  
+		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState==4 && xhr.status==200){
+                
+			}
+		}
+		xhr.send(null);
+	}  
+}
+//关闭串口
+function closeSerial(){
+    var xhr = GetXmlHttpObject();   
+	if(xhr){  
+		xhr.open("GET","assistfunction.lua?closeSerial",true);  
+		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState==4 && xhr.status==200){
+                
+			}
+		}
+		xhr.send(null);
+	}  
+}
+function get_battery(){
+    var xhr = GetXmlHttpObject();   
+	if(xhr){  
+		xhr.open("GET","assistfunction.lua?get_battery",true);  
+		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState==4 && xhr.status==200){
+                if(xhr.responseText != ""){
+                    var num = parseFloat(xhr.responseText).toFixed(0);
+                    
+                    $("#bat").html(num+'%');
+                    if (num < 15){
+                        document.getElementById("bat").style.color="red";
+                    }else{
+                        document.getElementById("bat").style.color="green";
+                    }
+                }
+                timer = window.setTimeout(get_battery,1000);
+			}
+		}
+		xhr.send(null);
+	}  
+}
+
+
+window.onload = function(){
+    var json = {"data":[]};
+    for(var i = 0; i < 4; ++i){
+        var newjson = {};
+        newjson["name"] = "白菜"+i;
+        newjson["age"]  = 100+i;
+        newjson["type"] = "蔬菜"; 
+        json.data.push(newjson);
+    }
+    console.log(json);
+
+    var str = '{"data":[{"leg":"6条腿", "name":"小昆虫"},{"leg":"4条腿", "name":"小白菜"},{"leg":"8条腿", "name":"小章鱼"}]}';
+    var json1 = JSON.parse(str);
+    for(var i = 0; i < json1.data.length; ++i){
+        console.log(json1.data[i].name+" "+json1.data[i].leg);
+    }
+} 
+
+</script>
