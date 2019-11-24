@@ -1,0 +1,51 @@
+<html>
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title></title>
+
+<script type="text/javascript" src="./JSON/jquery.min.js"></script>
+<script type="text/javascript" src="./JSON/jquery.flexslider-min.js"></script>
+</head>
+<body>
+
+	<input type="text" id="txtid" value="哈哈哈"/><br/><!--可手动修改值-->
+	<input type="text" id="txtidreadonly" value="哈哈哈" readonly/><br/><!--不可手动修改值-->
+	<input type="text" id="txtiddisabled" value="哈哈哈" disabled/><br/><!--不可手动修改值-->
+	<input type="button" value="settext" onclick="setfunc1()"/><br/>
+	<input type="button" value="gettext" onclick="getfunc1()"/><br/>
+	
+	<input type="checkbox" id="cbid" />嘿嘿<br/><!--可手动点击复选框-->
+	<input type="checkbox" id="cbidreadonly" readonly/>嘿嘿<br/><!--可手动点击复选框-->
+	<input type="checkbox" id="cbiddisabled" disabled/>嘿嘿<br/><!--不可手动点击复选框-->
+	<input type="button" value="setcbx" onclick="setfunc2()"/><br/>
+	<input type="button" value="getcbx" onclick="getfunc2()"/><br/>
+</body>
+</html>
+
+<script language="javascript">
+
+function setfunc1(){
+	$("#txtid").val("1111");
+	$("#txtidreadonly").val("1111");
+	$("#txtiddisabled").val("1111");
+}
+
+function getfunc1(){
+	console.log($("#txtid").val());
+	console.log($("#txtidreadonly").val());
+	console.log($("#txtiddisabled").val());
+}
+
+function setfunc2(){
+	$("#cbid").attr("checked", true);
+	$("#cbidreadonly").attr("checked", true);
+	$("#cbiddisabled").attr("checked", true);
+}
+function getfunc2(){
+	console.log($("#cbid").attr("checked"));
+	console.log($("#cbidreadonly").attr("checked"));
+	console.log($("#cbiddisabled").attr("checked"));
+}
+
+</script>
